@@ -1,0 +1,17 @@
+services:
+
+  notifications:
+    build: .
+    env_file: .env
+    profiles: ["api"]
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./src:/opt/app/src
+    networks:
+      - container_local
+
+networks:
+  container_local:
+    external: true

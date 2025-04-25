@@ -1,0 +1,70 @@
+[project]
+name = "notifications"
+version = "0.1.0"
+description = "Add your description here"
+dependencies = [
+    "fastapi>=0.115.12",
+    "pydantic[email]>=2.11.3",
+    "pydantic-settings>=2.9.1",
+    "aiokafka>=0.12.0",
+    "uvicorn>=0.34.2",
+    "aiosmtplib>=4.0.0",
+    "ruff>=0.11.6",
+    "black>=25.1.0",
+    "mypy>=1.15.0",
+    "alembic>=1.15.2",
+    "punq>=0.7.0",
+    "sqlalchemy[asyncio]>=2.0.40",
+    "psycopg-binary>=3.2.6",
+    "psycopg>=3.2.6",
+    "pydantic-extra-types>=2.10.3",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/notifications"]
+
+[tool.black]
+line-length = 120
+target-version = ["py312"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+  | \alembic
+)/
+'''
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+exclude = [
+    ".venv",
+    "alembic",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+fixable = ["ALL"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "./src"
+ignore_missing_imports = true
+strict_optional = true
+disallow_untyped_defs = true
